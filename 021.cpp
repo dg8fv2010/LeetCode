@@ -13,7 +13,33 @@ public:
        ListNode* p=head;
        while (l1!=NULL || l2!=NULL)
        {
-       		
+       		ListNode* cur;
+       		if (l1==NULL)
+       		{
+       			cur=l2;
+       			l2=l2->next;
+       		}
+       		else if (l2==NULL)
+       		{
+       			cur=l1;
+       			l1=l1->next;
+       		}
+       		else
+       		{
+       			if (l1->val<=l2->val)
+       			{
+       				cur=l1;
+       				l1=l1->next;
+       			}
+       			else
+       			{
+       				cur=l2;
+       				l2=l2->next;
+       			}
+       		}
+       		p->next=cur;
+       		p=p->next;
        }
+       return head->next;
     }
 };
