@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// use set instead of vector
 class Solution {
 public:
     bool wordPattern(string pattern, string str) {
