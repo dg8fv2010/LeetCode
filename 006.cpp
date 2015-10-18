@@ -1,67 +1,44 @@
 class Solution {
 public:
     string convert(string s, int numRows) {
-        vector<vector<char> > mat;
-        for (int i=0;i<numRows;i++)
+       if (numRows<=1 || s.length()==0)
+       {
+        return s;
+       }
+
+       string ans;
+       int len=s.length();
+       int i=0;
+       while (i<len && i<numRows)
+       {
+        int idx=i;
+        ans+=s[idx];
+
+        for (int k=1;idx<len;k++)
         {
-            vector<char> v;
-            mat.push_back(v);
-        }
-        int i=0;
-        int column=0;
-        int row=0;
-        while (i<s.size())
-        {
-            if (row%2==0)
+            if (i==0 || i==numRows-1)
             {
-                for (column=0;column<numRows;column++)
-                {
-                    if (i<s.size())
-                    {
-                        mat[column].push_back(s[i++]);
-                    }
-                    else
-                    {
-                        mat[column].push_back(' ');
-                    }
-                }
-                row++;
+                idx+=2*numRows-2;
             }
             else
             {
-                for (column=0;column<numRows;column++)
+                if (k&0x01)
                 {
-                    if (column==numRows/2)
-                    {
-                        if (i<s.size())
-                        {
-                            mat[column].push_back(s[i++]);
-                        }
-                        else
-                        {
-                            mat[column].push_back(' ');
-                        }
-                    }
-                    else
-                    {
-                        mat[column].push_back(' ');
-                    }
+                    idx+=2*(numRows-1-i);
                 }
-                row++;
+                else
+                {
+                    idx+=2*i;
+                }
             }
-        }
-        
-        string ans;
-        for (int i=0;i<mat.size();i++)
-        {
-            for (int j=0;j<mat[i].size();j++)
+            if (idx<len)
             {
-                if (mat[i][j]!=' ')
-                {
-                    ans+=mat[i][j];
-                }
+                ans+=s[idx];
             }
         }
-        return ans;
+        i++;
+       }
+
+       return ans;
     }
 };
