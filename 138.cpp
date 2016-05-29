@@ -27,7 +27,7 @@ public:
         {
             if (tHead->random)
             {
-                tHead->next->random=tHead->random->next;
+                tHead->next->random=tHead->random->next; //  copy random
             }
             tHead=tHead->next->next;
         }
